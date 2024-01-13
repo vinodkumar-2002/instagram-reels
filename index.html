@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Inst Reels </title>
+    <link rel="icon" href="logo.jpeg" type="image/jpeg" style="border-radius: 16px;">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(to right, #3498db, #8e44ad);
+            /* Blue to Purple gradient */
+            color: white;
+            /* Set text color to white for better visibility */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            /* Semi-transparent white background for better readability */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: #8e44ad;
+            /* Purple color for the button */
+            border-color: #8e44ad;
+        }
+
+        .btn-primary:hover {
+            background-color: #673ab7;
+            /* Darker purple on hover */
+            border-color: #673ab7;
+        }
+    </style>
+    <style>
+        /* Styles for the spinner and overlay */
+        #spinner-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light  my-0" style="border-radius: 8px;">
+        <div class="container-fluid  py-0 mx-0 my-0">
+            <a class="navbar-brand " href="#">
+                <img src="logo.jpeg" alt="" width="40" height="40" class="d-inline-block align-text-top mx-1">
+                Inst Reels
+            </a>
+        </div>
+    </nav>
+
+    <div id="firstDiv" class="container my-4" style="padding: 20px;">
+        <h1 class="mt-5 my-3" style="color: #8e44ad;">Instagram Reels Download </h1>
+
+        <div class="mb-3">
+            <div class="mb-3 input-group">
+                <input type="text" required class="form-control" id="redirectInput" placeholder="Paste Instagram URL">
+                <button class="btn btn-primary" type="button" onclick="togglePasteClear()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor"
+                        class="bi bi-clipboard mx-1" viewBox="0 0 16 16">
+                        <path
+                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+                        <path
+                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+                    </svg>
+                    Paste
+                </button>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button" onclick="download()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download"
+                viewBox="0 0 16 16">
+                <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5">
+                </path>
+                <path
+                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z">
+                </path>
+            </svg>
+            Download
+        </button>
+    </div>
+
+    <div id="secondDiv" class="container my-4" style="padding: 20px; color: black; display: none;">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                <img src="" alt="Team Photo" style="height: 300px; width: 200px;" id="thumb"
+                    class="img-fluid rounded mx-0">
+            </div>
+
+            <div class="col-lg-7" style="overflow: hidden;">
+                <div class="row">
+                    <div class="col-lg-1">Type:</div>
+                    <div class="col-lg-11">
+                        <p style="display: inline-block; margin-right: 10px;">
+                            <span id="type" style="display: inline;"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">Title:</div>
+                    <div class="col-lg-11">
+                        <p style="display: inline-block;">
+                            <span id="title" style="display: inline;"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-primary mx-1" id="downloadButton"
+                            style="background-color:blue;">Download</button>
+                        <button type="button" class="btn btn-primary" style="background-color:blue;"
+                            onclick="toggleDivs()">Back</button>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                    <!-- <div class="col-lg-8">
+                        <button type="button" class="btn btn-primary" style="background-color:blue;">Download</button>
+                    </div> -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Spinner -->
+    <div id="spinner-container">
+        <div class="spinner"></div>
+    </div>
+
+
+    <section class="container my-5" style="color:black;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="display-4">About Instagram Reels Download</h1>
+                <p class="lead">Welcome to Instagram Reels Download – Your Ultimate Reels Companion!</p>
+                <hr class="my-4">
+                <p>At Instagram Reels Download, we understand the importance of capturing and cherishing those
+                    unforgettable moments shared on Instagram Reels...</p>
+                <!-- <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#contact" role="button">Contact Us</a>
+        </p> -->
+            </div>
+            <!-- <div class="col-lg-4">
+                <img src="insta.jpeg" alt="Team Photo" style="height: 300px;" class="img-fluid rounded">
+            </div> -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Who We Are</h2>
+                <p>Our mission is to empower users with the ability to download and save their favorite Reels
+                    effortlessly...</p>
+            </div>
+            <div class="col-md-6">
+                <h2>What We Offer</h2>
+                <p>Our user-friendly platform allows you to download Instagram Reels with just a few simple clicks...
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Easy Link Input</li>
+                    <li>High-Quality Downloads</li>
+                    <li>Fast and Secure</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Why Choose Us</h2>
+                <ul>
+                    <li>Reliability</li>
+                    <li>User-Friendly Interface</li>
+                    <li>No Hassle, Just Reels</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Connect With Us</h2>
+                <p>Follow us on Instagram @InstaReelsDownload for updates, tips, and highlights on the latest
+                    features...</p>
+                <p>Have a question or suggestion? Feel free to reach out to our dedicated support team at <a
+                        href="mailto:support@instareelsdownload.com">support@instareelsdownload.com</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5" style="color:black;">
+        
+        <p class="float-end mb-1">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+              </svg> Back to top</a>
+        </p>
+        <p class="mb-1">© 2024 Inst Reels. All rights reserved.</p>
+        <p class="mb-0">New Instagram Reels downloader. Developed by Vinod Kumawat .
+        </p>
+        
+    </section>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        //clipboard
+        var isPasteMode = true;
+
+        function togglePasteClear() {
+
+            var button = document.querySelector('.btn-primary');
+            var clipboardIcon = button.querySelector('svg');
+
+            if (isPasteMode) {
+                // Change to clear mode
+                navigator.clipboard.readText().then(function (clipboardText) {
+                    // Set the clipboard text as the value of the text field
+                    document.getElementById('redirectInput').value = clipboardText;
+                }).catch(function (err) {
+                    console.error('Failed to read text from clipboard', err);
+                });
+                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"></path></svg> Clear';
+                isPasteMode = false;
+            } else {
+                // Change to paste mode
+                document.getElementById('redirectInput').value = "";
+                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor" class="bi bi-clipboard mx-1" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"></path><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"></path></svg> Paste';
+                isPasteMode = true;
+            }
+        }
+
+
+        //data
+        function download() {
+            var userurl = document.getElementById("redirectInput").value;
+            const url = 'https://instagram-post-and-reels-downloader.p.rapidapi.com/main/?url=' + userurl;
+            if (userurl === "") {
+                alert("Enter URL")
+            }
+            else {
+                fetchData(url);
+                showSpinner();
+                toggleDivs();
+            }
+
+        }
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '1c8e69b71bmsh91d8dd8ce5ffd6fp1fc3c9jsnb9837f306ee2',
+                'X-RapidAPI-Host': 'instagram-post-and-reels-downloader.p.rapidapi.com'
+            }
+        };
+        var urld = "";
+        async function fetchData(url) {
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json(); // Parse the response as JSON
+                console.log("Full response:", result); // Log the entire response
+                //alert(result)
+                if (result && result.length > 0) {
+                    var thumb = result[0].thumb;
+                    var type = result[0].type;
+                    var title = result[0].title;
+                    urld = result[0].link;
+
+                    // Update the image source
+                    document.getElementById("thumb").src = thumb;
+                    document.getElementById("type").innerHTML = type;
+                    document.getElementById("title").innerHTML = title;
+                    hideSpinner();
+                    //alert("hi")
+
+                } else {
+                     toggleDivs();
+                     hideSpinner();
+                     alert("Invalid URL")
+                     document.getElementById('redirectInput').value = "";
+                    //alert("Error: Invalid response or empty result array.");
+                    console.error("Invalid response or empty result array.");
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        //hide divs
+        function toggleDivs() {
+            var firstDiv = document.getElementById('firstDiv');
+            var secondDiv = document.getElementById('secondDiv');
+
+            if (firstDiv.style.display !== 'none') {
+                firstDiv.style.display = 'none';
+                secondDiv.style.display = 'block';
+            } else {
+                firstDiv.style.display = 'block';
+                secondDiv.style.display = 'none';
+            }
+        }
+        //
+        //download bunnon to download video
+        document.getElementById('downloadButton').addEventListener('click', function () {
+            // alert(urld)
+            var downloadLink = document.createElement('a');
+            downloadLink.href = urld;
+            downloadLink.download = 'video.mp4';
+            downloadLink.click();
+        });
+
+        //Function to show the spinner
+        function showSpinner() {
+            document.getElementById('spinner-container').style.display = 'flex';
+        }
+
+        // Function to hide the spinner
+        function hideSpinner() {
+            document.getElementById('spinner-container').style.display = 'none';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
